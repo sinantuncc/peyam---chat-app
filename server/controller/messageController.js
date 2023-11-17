@@ -5,18 +5,6 @@ module.exports.addMessage = async (req, res, next) => {
   try {
     const { from, to, message } = req.body;
 
-    // const salt = '$2a$10$' + from.toString() + to.toString() + message.length;
-
-    // const hashedMessage = await bcrypt.hash(message, salt);
-
-    // const result = await Message.create({
-    //   message: {
-    //     text: hashedMessage,
-    //   },
-    //   users: [from, to],
-    //   sender: from,
-    // });
-
     const result = await Message.create({
       message: {
         text: message,
@@ -24,8 +12,6 @@ module.exports.addMessage = async (req, res, next) => {
       users: [from, to],
       sender: from,
     });
-
-    //delete result.message;
 
     if (result)
       return res.json({
